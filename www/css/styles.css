@@ -58,4 +58,176 @@ table {
 
 /* END CSS RESET */
 
+/* general */
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #E0E0E0;
+  color: white;
+  font-family: sans-serif;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+/* END general */
+
+/* header */
+.page-header {
+  padding: 1em 5% 0 5%;
+}
+
+@media screen and (min-width: 768px) {
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.main-heading {
+  color: #9A0100;
+  font-weight: bold;
+  font-size: 1.5em;
+  padding: .3em 0;
+}
+
+.main-heading::first-letter {
+  color: white;
+  background: #9A0100;
+  text-transform: uppercase;
+  padding: .3em;
+  font-weight: bold;
+  margin-right: .1em;
+}
+
+.main-menu {
+  margin-top: .7em;
+}
+
+@media screen and (min-width: 768px) {
+  .main-menu .menu-list {
+    display: flex;
+  }
+}
+
+.main-menu .menu-item {
+  background: #9A0100;
+  padding: .5em 1.1em;
+}
+
+.main-menu .menu-item:not(:first-child) {
+  margin-top: .4em;
+}
+
+@media screen and (min-width: 768px) {
+  .main-menu .menu-item:not(:first-child) {
+    margin-top: 0;
+    margin-left: .3em;
+  }
+}
+
+/* END header */
+
+/* content */
+.page-content {
+  margin-top: 1em;
+}
+
+.content-header {
+  padding: 2em 5%;
+  background: #F0F0F0;
+}
+
+.content-heading {
+  color: #9A0100;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.content-section {
+  padding: 0 5%;
+  margin-top: 1.2em;
+}
+
+@media screen and (min-width: 768px) {
+  .content-section {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 2em;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .content-section {
+    grid-template-columns: auto auto auto;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .content-section {
+    grid-template-columns: auto auto auto auto;
+  }
+}
+
+.rent-offer-article {
+  background: #F0F0F0;
+  border: 1px solid white;
+  padding: .4em 1em;
+}
+
+.rent-offer-article:not(:first-child) {
+  margin-top: .2em;
+}
+
+@media screen and (min-width: 768px) {
+  .rent-offer-article {
+    /*max-width: 16em;*/
+  }
+
+  .rent-offer-article:not(:first-child) {
+    margin-top: 0;
+  }
+}
+
+.rent-offer-header {
+  margin-top: 1.5em;
+}
+
+.rent-offer-heading {
+  color: #9A0100;
+  font-size: .9em;
+  font-weight: bold;
+}
+
+.rent-offer-section {
+  margin-top: 1em;
+}
+
+.car-image {
+  width: 100%;
+}
+
+.car-price {
+  color: #9A0100;
+  font-size: .8em;
+  margin-top: 1em;
+}
+
+.car-order {
+  background: #9A0100;
+  margin-top: .3em;
+  display: block;
+  width: fit-content;
+  padding: .4em .7em;
+}
+/* END content */
