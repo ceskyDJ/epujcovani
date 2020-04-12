@@ -1,0 +1,2 @@
+# Ignore files with backups of MySQL Workbench
+*.bak

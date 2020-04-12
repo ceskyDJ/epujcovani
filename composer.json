@@ -1,0 +1,13 @@
+{
+    "name": "ceskydj/epujcovani",
+    "description": "This is a school project for SPŠE a VOŠ Pardubice",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michal ŠMAHEL",
+            "email": "48548230+ceskyDJ@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}

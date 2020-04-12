@@ -1,0 +1,10 @@
+# Jetbrains IDE's Files
+.idea/
+
+# Composer
+vendor/
+
+# temp and log Files (not only in temp and log directories)
+*~
+*.tmp
+*.log
