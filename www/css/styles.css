@@ -71,7 +71,7 @@ body {
 
 body {
   background: #E0E0E0;
-  color: white;
+  color: #9A0100;
   font-family: sans-serif;
 }
 
@@ -95,7 +95,6 @@ a {
 }
 
 .main-heading {
-  color: #9A0100;
   font-weight: bold;
   font-size: 1.5em;
   padding: .3em 0;
@@ -149,7 +148,6 @@ a {
 }
 
 .content-heading {
-  color: #9A0100;
   font-size: 1.3em;
   font-weight: bold;
 }
@@ -179,24 +177,23 @@ a {
   }
 }
 
-.rent-offer-article {
+.section-article {
   background: #F0F0F0;
-  border: 1px solid white;
-  padding: .4em 1em;
 }
 
-.rent-offer-article:not(:first-child) {
+.section-article:not(:first-child) {
   margin-top: .2em;
 }
 
 @media screen and (min-width: 768px) {
-  .rent-offer-article {
-    /*max-width: 16em;*/
-  }
-
-  .rent-offer-article:not(:first-child) {
+  .section-article:not(:first-child) {
     margin-top: 0;
   }
+}
+
+.rent-offer-article {
+  border: 1px solid white;
+  padding: .4em 1em;
 }
 
 .rent-offer-header {
@@ -219,8 +216,11 @@ a {
 
 .car-price {
   color: #9A0100;
-  font-size: .8em;
   margin-top: 1em;
+}
+
+.rent-offer-section .car-price {
+  font-size: .8em;
 }
 
 .car-order {
@@ -229,5 +229,91 @@ a {
   display: block;
   width: fit-content;
   padding: .4em .7em;
+}
+
+.done-rent-article {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: .1em;
+}
+
+.car-info {
+  border: 1px solid white;
+  border-top: none;
+  padding: 2em 1.2em;
+}
+
+.car-info .car-price {
+  font-size: .9em;
+}
+
+.car-name {
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.other-data {
+  display: grid;
+  flex-direction: column;
+  width: 100%;
+  grid-template-columns: 100%;
+  padding-left: .2em;
+  font-size: .9em;
+}
+
+.user-info {
+  border-bottom: 1px solid white;
+  margin-top: 2em;
+}
+
+.user-info,
+.rent-info {
+  padding: 0 1.2em 1.2em 1.2em;
+}
+
+.user-full-name {
+  font-weight: bold;
+  font-size: 1.5em;
+  white-space: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.user-email {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  margin: 1em 0;
+}
+
+.rent-info {
+  border-top: 1px solid white;
+  margin-top: .1em;
+  padding-top: 2em;
+}
+
+.rent-date {
+  white-space: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  font-weight: bold;
+}
+
+.rent-length {
+  margin: 1em 0;
+}
+
+.tools {
+  margin-top: 1.5em;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tools a:not(:last-child) {
+  margin-right: 1.3em;
+}
+
+.tools svg {
+  color: #9A0100;
+  font-size: 1.5em;
 }
 /* END content */

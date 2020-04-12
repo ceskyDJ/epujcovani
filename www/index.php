@@ -29,9 +29,10 @@ declare(strict_types = 1);
 
     <nav class="main-menu">
         <ul class="menu-list">
-            <li class="menu-item"><a href="#" class="menu-link">Nabídka</a></li>
+            <li class="menu-item"><a href="index.php" class="menu-link">Nabídka</a></li>
             <li class="menu-item"><a href="#" class="menu-link">Podmínky</a></li>
             <li class="menu-item"><a href="#" class="menu-link">Kontakty</a></li>
+            <li class="menu-item"><a href="vypujcky-administrace.php" class="menu-link">Administrace</a></li>
         </ul>
     </nav>
 </header>
@@ -44,7 +45,7 @@ declare(strict_types = 1);
 
 
     <section class="content-section">
-        <article class="rent-offer-article">
+        <article class="section-article rent-offer-article">
             <header class="rent-offer-header">
                 <h3 class="rent-offer-heading">Open Bus</h3>
             </header>
@@ -58,7 +59,7 @@ declare(strict_types = 1);
             </section>
         </article>
 
-        <article class="rent-offer-article">
+        <article class="section-article rent-offer-article">
             <header class="rent-offer-header">
                 <h3 class="rent-offer-heading">Open Bus</h3>
             </header>
@@ -72,7 +73,7 @@ declare(strict_types = 1);
             </section>
         </article>
 
-        <article class="rent-offer-article">
+        <article class="section-article rent-offer-article">
             <header class="rent-offer-header">
                 <h3 class="rent-offer-heading">Open Bus</h3>
             </header>
@@ -86,7 +87,7 @@ declare(strict_types = 1);
             </section>
         </article>
 
-        <article class="rent-offer-article">
+        <article class="section-article rent-offer-article">
             <header class="rent-offer-header">
                 <h3 class="rent-offer-heading">Open Bus</h3>
             </header>
@@ -100,7 +101,7 @@ declare(strict_types = 1);
             </section>
         </article>
 
-        <article class="rent-offer-article">
+        <article class="section-article rent-offer-article">
             <header class="rent-offer-header">
                 <h3 class="rent-offer-heading">Open Bus</h3>
             </header>
@@ -114,7 +115,7 @@ declare(strict_types = 1);
             </section>
         </article>
 
-        <article class="rent-offer-article">
+        <article class="section-article rent-offer-article">
             <header class="rent-offer-header">
                 <h3 class="rent-offer-heading">Open Bus</h3>
             </header>
@@ -128,7 +129,7 @@ declare(strict_types = 1);
             </section>
         </article>
 
-        <article class="rent-offer-article">
+        <article class="section-article rent-offer-article">
             <header class="rent-offer-header">
                 <h3 class="rent-offer-heading">Open Bus</h3>
             </header>
@@ -142,7 +143,7 @@ declare(strict_types = 1);
             </section>
         </article>
 
-        <article class="rent-offer-article">
+        <article class="section-article rent-offer-article">
             <header class="rent-offer-header">
                 <h3 class="rent-offer-heading">Open Bus</h3>
             </header>
