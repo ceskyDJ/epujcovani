@@ -8,6 +8,14 @@ declare(strict_types = 1);
  * @author Michal Šmahel (ceskyDJ) <admin@ceskydj.cz>
  * @copyright (C) 2020-now, Michal ŠMAHEL
  */
+
+use App\Model\CarManager;
+
+require_once __DIR__.'/../src/starter.php';
+
+$carManager = new CarManager($db);
+
+$cars = $carManager->getCars();
 ?>
 <!doctype html>
 
@@ -45,117 +53,21 @@ declare(strict_types = 1);
 
 
     <section class="content-section">
+        <?php foreach ($cars as $car): ?>
         <article class="section-article rent-offer-article">
             <header class="rent-offer-header">
-                <h3 class="rent-offer-heading">Open Bus</h3>
+                <h3 class="rent-offer-heading"><?= $car['name'] ?></h3>
             </header>
 
             <section class="rent-offer-section">
-                <img src="img/36.png" alt="Ilustrační obrázek: Open Bus" class="car-image" />
+                <img src="img/<?= $car['image_name'] ?>" alt="Ilustrační obrázek: <?= $car['name'] ?>" class="car-image" />
 
-                <p class="car-price">Cena: 1000 Kč za den</p>
+                <p class="car-price">Cena: <?= $car['day_price'] ?>&nbsp;Kč za den</p>
 
                 <a href="#" class="car-order">Objednat</a>
             </section>
         </article>
-
-        <article class="section-article rent-offer-article">
-            <header class="rent-offer-header">
-                <h3 class="rent-offer-heading">Open Bus</h3>
-            </header>
-
-            <section class="rent-offer-section">
-                <img src="img/36.png" alt="Ilustrační obrázek: Open Bus" class="car-image" />
-
-                <p class="car-price">Cena: 1000 Kč za den</p>
-
-                <a href="#" class="car-order">Objednat</a>
-            </section>
-        </article>
-
-        <article class="section-article rent-offer-article">
-            <header class="rent-offer-header">
-                <h3 class="rent-offer-heading">Open Bus</h3>
-            </header>
-
-            <section class="rent-offer-section">
-                <img src="img/36.png" alt="Ilustrační obrázek: Open Bus" class="car-image" />
-
-                <p class="car-price">Cena: 1000 Kč za den</p>
-
-                <a href="#" class="car-order">Objednat</a>
-            </section>
-        </article>
-
-        <article class="section-article rent-offer-article">
-            <header class="rent-offer-header">
-                <h3 class="rent-offer-heading">Open Bus</h3>
-            </header>
-
-            <section class="rent-offer-section">
-                <img src="img/36.png" alt="Ilustrační obrázek: Open Bus" class="car-image" />
-
-                <p class="car-price">Cena: 1000 Kč za den</p>
-
-                <a href="#" class="car-order">Objednat</a>
-            </section>
-        </article>
-
-        <article class="section-article rent-offer-article">
-            <header class="rent-offer-header">
-                <h3 class="rent-offer-heading">Open Bus</h3>
-            </header>
-
-            <section class="rent-offer-section">
-                <img src="img/36.png" alt="Ilustrační obrázek: Open Bus" class="car-image" />
-
-                <p class="car-price">Cena: 1000 Kč za den</p>
-
-                <a href="#" class="car-order">Objednat</a>
-            </section>
-        </article>
-
-        <article class="section-article rent-offer-article">
-            <header class="rent-offer-header">
-                <h3 class="rent-offer-heading">Open Bus</h3>
-            </header>
-
-            <section class="rent-offer-section">
-                <img src="img/36.png" alt="Ilustrační obrázek: Open Bus" class="car-image" />
-
-                <p class="car-price">Cena: 1000 Kč za den</p>
-
-                <a href="#" class="car-order">Objednat</a>
-            </section>
-        </article>
-
-        <article class="section-article rent-offer-article">
-            <header class="rent-offer-header">
-                <h3 class="rent-offer-heading">Open Bus</h3>
-            </header>
-
-            <section class="rent-offer-section">
-                <img src="img/36.png" alt="Ilustrační obrázek: Open Bus" class="car-image" />
-
-                <p class="car-price">Cena: 1000 Kč za den</p>
-
-                <a href="#" class="car-order">Objednat</a>
-            </section>
-        </article>
-
-        <article class="section-article rent-offer-article">
-            <header class="rent-offer-header">
-                <h3 class="rent-offer-heading">Open Bus</h3>
-            </header>
-
-            <section class="rent-offer-section">
-                <img src="img/36.png" alt="Ilustrační obrázek: Open Bus" class="car-image" />
-
-                <p class="car-price">Cena: 1000 Kč za den</p>
-
-                <a href="#" class="car-order">Objednat</a>
-            </section>
-        </article>
+        <?php endforeach; ?>
     </section>
 </main>
 </body>
