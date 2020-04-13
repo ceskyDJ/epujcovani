@@ -7,13 +7,13 @@ namespace App\Model;
 use App\Database\DB;
 
 /**
- * Car manager
+ * User manager
  *
  * @author Michal Šmahel (ceskyDJ) <admin@ceskydj.cz>
  * @copyright (C) 2020-Současnost, Michal ŠMAHEL
  * @package App\Model
  */
-class CarManager
+class UserManager
 {
     /**
      * @var \App\Database\DB
@@ -31,24 +31,18 @@ class CarManager
     }
 
     /**
-     * Returns all cars
+     * Returns user by its ID
      *
-     * @return array Cars ordered by their price
+     * @param int $id User's ID
+     *
+     * @return array User
      */
-    public function getCars(): array
+    public function getUser(int $id): array
     {
-        return $this->db->moreResults("SELECT * FROM `cars` ORDER BY `day_price`");
-    }
+        $user = $this->db->oneResult("SELECT * FROM `users` WHERE `user_id` = ?", $id);
 
-    /**
-     * Return car by its ID
-     *
-     * @param int $id Car's ID
-     *
-     * @return array Car
-     */
-    public function getCar(int $id): array
-    {
-        return $this->db->oneResult("SELECT * FROM `cars` WHERE `car_id` = ?", $id);
+        $user['full_name'] = "{$user['first_name']} {$user['last_name']}";
+
+        return $user;
     }
 }

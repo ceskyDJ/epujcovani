@@ -8,6 +8,18 @@ declare(strict_types = 1);
  * @author Michal Šmahel (ceskyDJ) <admin@ceskydj.cz>
  * @copyright (C) 2020-Současnost, Michal ŠMAHEL
  */
+
+use App\Model\CarManager;
+use App\Model\RentManager;
+use App\Model\UserManager;
+
+require_once __DIR__.'/../src/starter.php';
+
+$carManager = new CarManager($db);
+$userManager = new UserManager($db);
+$rentManager = new RentManager($db, $carManager, $userManager);
+
+$rents = $rentManager->getActualRents();
 ?>
 <!doctype html>
 
@@ -39,24 +51,25 @@ declare(strict_types = 1);
 
 <main class="page-content">
     <section class="content-section">
+        <?php foreach ($rents as $rent): ?>
         <article class="section-article done-rent-article">
             <div class="car-info">
-                <h3 class="car-name">Jaguár</h3>
-                <img src="img/2.png" alt="Ilustrační fotografie: Jaguár" class="car-image" />
-                <p class="car-price">Cena: 2200 Kč za den</p>
+                <h3 class="car-name"><?= $rent['car']['name'] ?></h3>
+                <img src="img/<?= $rent['car']['image_name'] ?>" alt="Ilustrační fotografie: <?= $rent['car']['name'] ?>" class="car-image" />
+                <p class="car-price">Cena: <?= $rent['car']['day_price'] ?>&nbsp;Kč za den</p>
             </div>
 
             <div class="other-data">
                 <div class="user-info">
-                    <h3 class="user-full-name">Karel Novák</h3>
-                    <p class="user-email">karel.novak@seznam.cz</p>
-                    <p class="user-phone">606 456 123</p>
+                    <h3 class="user-full-name"><?= $rent['user']['full_name'] ?></h3>
+                    <p class="user-email"><?= $rent['user']['email'] ?></p>
+                    <p class="user-phone"><?= $rent['user']['phone'] ?></p>
                 </div>
 
                 <div class="rent-info">
-                    <h3 class="rent-date">1. 4. 2020-3. 4. 2020</h3>
-                    <p class="rent-length">3 dny</p>
-                    <p class="rent-price">6600 Kč</p>
+                    <h3 class="rent-date"><?= $rent['from']->format("j. n. Y") ?>-<?= $rent['to']->format("j. n. Y") ?></h3>
+                    <p class="rent-length"><?= $rent['length'] ?></p>
+                    <p class="rent-price"><?= $rent['price'] ?>&nbsp;Kč</p>
 
                     <div class="tools">
                         <a href="#" class="edit-rent"><i class="fas fa-pen"></i></a>
@@ -65,87 +78,7 @@ declare(strict_types = 1);
                 </div>
             </div>
         </article>
-
-        <article class="section-article done-rent-article">
-            <div class="car-info">
-                <h3 class="car-name">Jaguár</h3>
-                <img src="img/2.png" alt="Ilustrační fotografie: Jaguár" class="car-image" />
-                <p class="car-price">Cena: 2200 Kč za den</p>
-            </div>
-
-            <div class="other-data">
-                <div class="user-info">
-                    <h3 class="user-full-name">Karel Novák</h3>
-                    <p class="user-email">karel.novak@seznam.cz</p>
-                    <p class="user-phone">606 456 123</p>
-                </div>
-
-                <div class="rent-info">
-                    <h3 class="rent-date">1. 4. 2020-3. 4. 2020</h3>
-                    <p class="rent-length">3 dny</p>
-                    <p class="rent-price">6600 Kč</p>
-
-                    <div class="tools">
-                        <a href="#" class="edit-rent"><i class="fas fa-pen"></i></a>
-                        <a href="#" class="delete-rent"><i class="fas fa-trash"></i></a>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <article class="section-article done-rent-article">
-            <div class="car-info">
-                <h3 class="car-name">Jaguár</h3>
-                <img src="img/2.png" alt="Ilustrační fotografie: Jaguár" class="car-image" />
-                <p class="car-price">Cena: 2200 Kč za den</p>
-            </div>
-
-            <div class="other-data">
-                <div class="user-info">
-                    <h3 class="user-full-name">Karel Novák</h3>
-                    <p class="user-email">karel.novak@seznam.cz</p>
-                    <p class="user-phone">606 456 123</p>
-                </div>
-
-                <div class="rent-info">
-                    <h3 class="rent-date">1. 4. 2020-3. 4. 2020</h3>
-                    <p class="rent-length">3 dny</p>
-                    <p class="rent-price">6600 Kč</p>
-
-                    <div class="tools">
-                        <a href="#" class="edit-rent"><i class="fas fa-pen"></i></a>
-                        <a href="#" class="delete-rent"><i class="fas fa-trash"></i></a>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <article class="section-article done-rent-article">
-            <div class="car-info">
-                <h3 class="car-name">Jaguár</h3>
-                <img src="img/2.png" alt="Ilustrační fotografie: Jaguár" class="car-image" />
-                <p class="car-price">Cena: 2200 Kč za den</p>
-            </div>
-
-            <div class="other-data">
-                <div class="user-info">
-                    <h3 class="user-full-name">Karel Novák</h3>
-                    <p class="user-email">karel.novak@seznam.cz</p>
-                    <p class="user-phone">606 456 123</p>
-                </div>
-
-                <div class="rent-info">
-                    <h3 class="rent-date">1. 4. 2020-3. 4. 2020</h3>
-                    <p class="rent-length">3 dny</p>
-                    <p class="rent-price">6600 Kč</p>
-
-                    <div class="tools">
-                        <a href="#" class="edit-rent"><i class="fas fa-pen"></i></a>
-                        <a href="#" class="delete-rent"><i class="fas fa-trash"></i></a>
-                    </div>
-                </div>
-            </div>
-        </article>
+        <?php endforeach; ?>
     </section>
 </main>
 
