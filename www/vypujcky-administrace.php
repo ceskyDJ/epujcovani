@@ -30,7 +30,7 @@ $rents = $rentManager->getActualRents();
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="author" content="Michal ŠMAHEL (ceskyDJ)" />
-    <title>ŠMAHEL - ePujcovani.cz</title>
+    <title>ŠMAHEL - Administrace výpůjček | ePujcovani.cz</title>
     <link rel="stylesheet" href="css/styles.css" type="text/css" />
 </head>
 
