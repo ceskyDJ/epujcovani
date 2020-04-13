@@ -9,5 +9,9 @@
             "email": "48548230+ceskyDJ@users.noreply.github.com"
         }
     ],
-    "require": {}
+    "require": {
+        "nette/database": "^3.0",
+        "tracy/tracy": "^2.7",
+        "nette/robot-loader": "^3.2"
+    }
 }
