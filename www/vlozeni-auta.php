@@ -9,11 +9,15 @@ declare(strict_types = 1);
  * @copyright (C) 2020-Současnost, Michal ŠMAHEL
  */
 
+use App\Model\CarManager;
 use App\Model\RentManager;
+use App\Model\UserManager;
 
 require_once __DIR__.'/../src/starter.php';
 
-$rentManager = new RentManager($db);
+$carManager = new CarManager($db);
+$userManager = new UserManager($db);
+$rentManager = new RentManager($db, $carManager, $userManager);
 
 $rents = $rentManager->getActualRents();
 ?>
@@ -50,16 +54,16 @@ $rents = $rentManager->getActualRents();
         <?php foreach ($rents as $rent): ?>
         <article class="section-article done-rent-article">
             <div class="car-info">
-                <h3 class="car-name"><?= $rent['car_name'] ?></h3>
-                <img src="img/<?= $rent['car_image'] ?>" alt="Ilustrační fotografie: <?= $rent['car_image'] ?>" class="car-image" />
-                <p class="car-price">Cena: <?= $rent['car_day_price'] ?>&nbsp;Kč za den</p>
+                <h3 class="car-name"><?= $rent['car']['name'] ?></h3>
+                <img src="img/<?= $rent['car']['image_name'] ?>" alt="Ilustrační fotografie: <?= $rent['car']['name'] ?>" class="car-image" />
+                <p class="car-price">Cena: <?= $rent['car']['day_price'] ?>&nbsp;Kč za den</p>
             </div>
 
             <div class="other-data">
                 <div class="user-info">
-                    <h3 class="user-full-name"><?= $rent['user_full_name'] ?></h3>
-                    <p class="user-email"><?= $rent['user_email'] ?></p>
-                    <p class="user-phone"><?= $rent['user_phone'] ?></p>
+                    <h3 class="user-full-name"><?= $rent['user']['full_name'] ?></h3>
+                    <p class="user-email"><?= $rent['user']['email'] ?></p>
+                    <p class="user-phone"><?= $rent['user']['phone'] ?></p>
                 </div>
 
                 <div class="rent-info">

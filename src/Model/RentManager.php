@@ -5,8 +5,6 @@ declare(strict_types = 1);
 namespace App\Model;
 
 use App\Database\DB;
-use Nette\Utils\DateTime;
-use function bdump;
 use function date_diff;
 
 /**
@@ -22,30 +20,15 @@ class RentManager
      * @var \App\Database\DB
      */
     private $db;
-    /**
-     * @var \App\Model\CarManager
-     */
-    private $carManager;
-    /**
-     * @var \App\Model\UserManager
-     */
-    private $userManager;
 
     /**
      * RentManager constructor
      *
      * @param \App\Database\DB $db
-     * @param \App\Model\CarManager $carManager
-     * @param \App\Model\UserManager $userManager
      */
-    public function __construct(
-        DB $db,
-        CarManager $carManager,
-        UserManager $userManager
-    ) {
+    public function __construct(DB $db)
+    {
         $this->db = $db;
-        $this->carManager = $carManager;
-        $this->userManager = $userManager;
     }
 
     /**
@@ -55,16 +38,24 @@ class RentManager
      */
     public function getActualRents(): array
     {
-        $rents = $this->db->moreResults("SELECT * FROM `car_rents` WHERE `to` > NOW() ORDER BY `from`");
+        $rents = $this->db->moreResults(
+            "
+            SELECT `car_rents`.`from`, `car_rents`.`to`,
+                   `cars`.`name` AS `car_name`, `cars`.`day_price` AS `car_day_price`, `cars`.`image_name` AS `car_image`,
+                   CONCAT(`users`.`first_name`, ' ', `users`.`last_name`) AS `user_full_name`, `users`.`email` AS `user_email`, `users`.`phone` AS `user_phone`
+            FROM `car_rents`
+            JOIN `cars` USING (`car_id`)
+            JOIN `users` USING (`user_id`)
+            WHERE `car_rents`.`to` > NOW()
+            ORDER BY `car_rents`.`from`
+        "
+        );
 
         foreach ($rents as &$rent) {
-            $rent['user'] = $this->userManager->getUser($rent['user_id']);
-            $rent['car'] = $this->carManager->getCar($rent['car_id']);
-
             // No sense to calculate, when it's one-day rent
             if ($rent['from']->getTimestamp() === $rent['to']->getTimestamp()) {
                 $rent['length'] = "1 den";
-                $rent['price'] = $rent['car']['day_price'];
+                $rent['price'] = $rent['car_day_price'];
 
                 continue;
             }
@@ -72,7 +63,7 @@ class RentManager
             $length = (date_diff($rent['to'], $rent['from']))->days + 1;
 
             $rent['length'] = $length < 5 ? "{$length} dny" : "{$length} dní";
-            $rent['price'] = $rent['car']['day_price'] * $length;
+            $rent['price'] = $rent['car_day_price'] * $length;
         }
 
         return $rents;
