@@ -7,6 +7,12 @@ namespace App\Database;
 use Nette\Database\Connection;
 use PDO;
 use PDOException;
+use ReflectionClass;
+use ReflectionObject;
+use function array_merge;
+use function array_unshift;
+use function call_user_func;
+use function call_user_func_array;
 
 /**
  * DB wrapper
@@ -62,12 +68,22 @@ class DB extends Connection
     /**
      * Executes a query without expecting any return
      *
+     * @noinspection PhpDocMissingThrowsInspection It's manually typed
+     *
      * @param $query string SQL query
      * @param $params array Params (question marks replace)
      */
     public function withoutResult(string $query, ...$params): void
     {
-        parent::query($query, $params);
+        $thisObject = new ReflectionObject($this);
+        $parentClass = $thisObject->getParentClass();
+
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $queryMethod = $parentClass->getMethod("query");
+        // Add query to params array
+        array_unshift($params, $query);
+
+        $queryMethod->invokeArgs($this, $params);
     }
 
     /**
