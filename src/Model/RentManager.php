@@ -5,6 +5,8 @@ declare(strict_types = 1);
 namespace App\Model;
 
 use App\Database\DB;
+use App\Utils\StringHelper;
+use function bdump;
 use function date_diff;
 
 /**
@@ -20,15 +22,21 @@ class RentManager
      * @var \App\Database\DB
      */
     private $db;
+    /**
+     * @var \App\Utils\StringHelper
+     */
+    private $stringHelper;
 
     /**
-     * RentManager constructor
+     * CarManager constructor
      *
      * @param \App\Database\DB $db
+     * @param \App\Utils\StringHelper $stringHelper
      */
-    public function __construct(DB $db)
+    public function __construct(DB $db, StringHelper $stringHelper)
     {
         $this->db = $db;
+        $this->stringHelper = $stringHelper;
     }
 
     /**
@@ -66,6 +74,6 @@ class RentManager
             $rent['price'] = $rent['car_day_price'] * $length;
         }
 
-        return $rents;
+        return $this->stringHelper->treatArray($rents);
     }
 }

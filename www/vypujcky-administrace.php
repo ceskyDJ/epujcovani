@@ -10,10 +10,12 @@ declare(strict_types = 1);
  */
 
 use App\Model\RentManager;
+use App\Utils\StringHelper;
 
 require_once __DIR__.'/../src/starter.php';
 
-$rentManager = new RentManager($db);
+$stringHelper = new StringHelper;
+$rentManager = new RentManager($db, $stringHelper);
 
 $rents = $rentManager->getActualRents();
 ?>
@@ -39,6 +41,7 @@ $rents = $rentManager->getActualRents();
         <ul class="menu-list">
             <li class="menu-item"><a href="index.php" class="menu-link">Nabídka</a></li>
             <li class="menu-item"><a href="vypujcky-administrace.php" class="menu-link">Administrace</a></li>
+            <li class="menu-item"><a href="vlozeni-auta.php" class="menu-link">Vložení auta</a></li>
             <li class="menu-item"><a href="#" class="menu-link">Odhlášení</a></li>
         </ul>
     </nav>

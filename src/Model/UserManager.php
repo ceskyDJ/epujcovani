@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Model;
 
 use App\Database\DB;
+use App\Utils\StringHelper;
 
 /**
  * User manager
@@ -19,15 +20,21 @@ class UserManager
      * @var \App\Database\DB
      */
     private $db;
+    /**
+     * @var \App\Utils\StringHelper
+     */
+    private $stringHelper;
 
     /**
      * CarManager constructor
      *
      * @param \App\Database\DB $db
+     * @param \App\Utils\StringHelper $stringHelper
      */
-    public function __construct(DB $db)
+    public function __construct(DB $db, StringHelper $stringHelper)
     {
         $this->db = $db;
+        $this->stringHelper = $stringHelper;
     }
 
     /**
@@ -43,6 +50,6 @@ class UserManager
 
         $user['full_name'] = "{$user['first_name']} {$user['last_name']}";
 
-        return $user;
+        return $this->stringHelper->treatArray($user);
     }
 }

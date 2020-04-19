@@ -10,10 +10,12 @@ declare(strict_types = 1);
  */
 
 use App\Model\CarManager;
+use App\Utils\StringHelper;
 
 require_once __DIR__.'/../src/starter.php';
 
-$carManager = new CarManager($db);
+$stringHelper = new StringHelper;
+$carManager = new CarManager($db, $stringHelper);
 
 $cars = $carManager->getCars();
 ?>
