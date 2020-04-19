@@ -3,7 +3,7 @@
 declare(strict_types = 1);
 
 /**
- * vypujcky-administrace.php
+ * vlozeni-auta.php
  *
  * @author Michal Šmahel (ceskyDJ) <admin@ceskydj.cz>
  * @copyright (C) 2020-Současnost, Michal ŠMAHEL
@@ -12,14 +12,16 @@ declare(strict_types = 1);
 use App\Model\CarManager;
 use App\Model\RentManager;
 use App\Model\UserManager;
+use App\Utils\StringHelper;
 
 require_once __DIR__.'/../src/starter.php';
 
-$carManager = new CarManager($db);
-$userManager = new UserManager($db);
-$rentManager = new RentManager($db, $carManager, $userManager);
+$stringHelper = new StringHelper;
+$carManager = new CarManager($db, $stringHelper);
 
-$rents = $rentManager->getActualRents();
+if ($_POST) {
+    $message = $carManager->addCar($_POST['name'], $_POST['day-price'], $_FILES['image']);
+}
 ?>
 <!doctype html>
 
@@ -30,7 +32,7 @@ $rents = $rentManager->getActualRents();
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="author" content="Michal ŠMAHEL (ceskyDJ)" />
-    <title>ŠMAHEL - Administrace výpůjček | ePujcovani.cz</title>
+    <title>ŠMAHEL - Vložení nového auta | ePujcovani.cz</title>
     <link rel="stylesheet" href="css/styles.css" type="text/css" />
 </head>
 
@@ -43,6 +45,7 @@ $rents = $rentManager->getActualRents();
         <ul class="menu-list">
             <li class="menu-item"><a href="index.php" class="menu-link">Nabídka</a></li>
             <li class="menu-item"><a href="vypujcky-administrace.php" class="menu-link">Administrace</a></li>
+            <li class="menu-item"><a href="vlozeni-auta.php" class="menu-link">Vložení auta</a></li>
             <li class="menu-item"><a href="#" class="menu-link">Odhlášení</a></li>
         </ul>
     </nav>
@@ -50,38 +53,39 @@ $rents = $rentManager->getActualRents();
 
 
 <main class="page-content">
-    <section class="content-section">
-        <?php foreach ($rents as $rent): ?>
-        <article class="section-article done-rent-article">
-            <div class="car-info">
-                <h3 class="car-name"><?= $rent['car']['name'] ?></h3>
-                <img src="img/<?= $rent['car']['image_name'] ?>" alt="Ilustrační fotografie: <?= $rent['car']['name'] ?>" class="car-image" />
-                <p class="car-price">Cena: <?= $rent['car']['day_price'] ?>&nbsp;Kč za den</p>
-            </div>
+    <section class="content-section form-page">
+        <header class="section-header">
+            <h2 class="content-heading">Vložení nového auta</h2>
+        </header>
 
-            <div class="other-data">
-                <div class="user-info">
-                    <h3 class="user-full-name"><?= $rent['user']['full_name'] ?></h3>
-                    <p class="user-email"><?= $rent['user']['email'] ?></p>
-                    <p class="user-phone"><?= $rent['user']['phone'] ?></p>
-                </div>
-
-                <div class="rent-info">
-                    <h3 class="rent-date"><?= $rent['from']->format("j. n. Y") ?>-<?= $rent['to']->format("j. n. Y") ?></h3>
-                    <p class="rent-length"><?= $rent['length'] ?></p>
-                    <p class="rent-price"><?= $rent['price'] ?>&nbsp;Kč</p>
-
-                    <div class="tools">
-                        <a href="#" class="edit-rent"><i class="fas fa-pen"></i></a>
-                        <a href="#" class="delete-rent"><i class="fas fa-trash"></i></a>
+        <section class="section-content">
+            <form id="_add-car-form" method="post" class="admin-form" enctype="multipart/form-data">
+                <div class="data-inputs">
+                    <div class="input-row">
+                        <input id="_car-name-input" name="name" type="text" class="full-width-input" placeholder="Název auta" title="Zadejte název auta" autofocus value="<?= isset($_POST['name'])
+                            ? $_POST['name'] : "" ?>" required />
+                    </div>
+                    <div class="input-row">
+                        <input id="_car-day-price-input" name="day-price" type="number" class="price-input" placeholder="Denní cena" title="Zadejte denní cenu za vypůjčení" value="<?= isset($_POST['day-price'])
+                            ? $_POST['day-price'] : "" ?>" required pattern="^[0-9]+$" />
+                    </div>
+                    <div class="input-row">
+                        <input id="_car-image-input" name="image" type="file" class="full-width-input" placeholder="Ilustrační obrázek" title="Vložte ilustrační obrázek" accept="image/*" required />
                     </div>
                 </div>
-            </div>
-        </article>
-        <?php endforeach; ?>
+
+                <input type="submit" value="Uložit" class="send-button">
+
+                <?php if (isset($message)): ?>
+                    <p class="form-message _error-message"><?= $message ?></p>
+                <?php endif; ?>
+            </form>
+        </section>
     </section>
 </main>
 
 <script src="https://kit.fontawesome.com/7d2f55cfde.js" crossorigin="anonymous"></script>
+<script src="/js/classes/CarManager.js"></script>
+<script src="/js/add-car.js"></script>
 </body>
 </html>

@@ -158,7 +158,7 @@ a {
 }
 
 @media screen and (min-width: 768px) {
-  .content-section {
+  .content-section:not(.form-page) {
     display: grid;
     grid-template-columns: auto auto;
     grid-gap: 2em;
@@ -166,13 +166,13 @@ a {
 }
 
 @media screen and (min-width: 1024px) {
-  .content-section {
+  .content-section:not(.form-page) {
     grid-template-columns: auto auto auto;
   }
 }
 
 @media screen and (min-width: 1920px) {
-  .content-section {
+  .content-section:not(.form-page) {
     grid-template-columns: auto auto auto auto;
   }
 }
@@ -315,5 +315,66 @@ a {
 .tools svg {
   color: #9A0100;
   font-size: 1.5em;
+}
+
+.form-page {
+  background: #F0F0F0;
+  padding: 0;
+  margin: 1.2em 5% 0 5%;
+  border: 1px solid white;
+  border-top: none;
+  max-width: 50em;
+}
+
+@media screen and (min-width: 1024px) {
+  .form-page {
+    margin: 0 auto;
+  }
+}
+
+.form-page .section-header {
+  padding: 2em 1em 1.5em 1em;
+}
+
+.form-page .section-content {
+  padding: 0 1em 1em 1em;
+}
+
+.admin-form input:not([type="submit"]) {
+  border: 1px inset #8A8A8A;
+  padding: .6em .5em;
+  font-weight: bold;
+  max-width: 30em;
+}
+
+.admin-form .input-row:not(:first-child) input {
+  margin-top: .6em;
+}
+
+.admin-form .full-width-input {
+  width: 100%;
+}
+
+.admin-form .price-input {
+  width: 8em;
+}
+
+.admin-form input[type="file"] {
+  background: white;
+}
+
+.admin-form .send-button {
+  background: #9A0100;
+  border: none;
+  color: white;
+  width: 100%;
+  margin-top: .6em;
+  padding: .4em 0;
+  font-weight: bold;
+  max-width: 30em;
+}
+
+.admin-form .form-message {
+  margin-top: 1em;
 }
 /* END content */
