@@ -62,7 +62,7 @@ $cars = $carManager->getCars();
             </header>
 
             <section class="rent-offer-section">
-                <img src="img/<?= $car['image_name'] ?>" alt="Ilustrační obrázek: <?= $car['name'] ?>" class="car-image" />
+                <img src="img/cars/<?= $car['image_name'] ?>" alt="Ilustrační obrázek: <?= $car['name'] ?>" class="car-image" />
 
                 <p class="car-price">Cena: <?= $car['day_price'] ?>&nbsp;Kč za den</p>
 

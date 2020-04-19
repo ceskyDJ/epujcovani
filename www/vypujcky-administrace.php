@@ -54,7 +54,7 @@ $rents = $rentManager->getActualRents();
         <article class="section-article done-rent-article">
             <div class="car-info">
                 <h3 class="car-name"><?= $rent['car_name'] ?></h3>
-                <img src="img/<?= $rent['car_image'] ?>" alt="Ilustrační fotografie: <?= $rent['car_image'] ?>" class="car-image" />
+                <img src="img/cars/<?= $rent['car_image'] ?>" alt="Ilustrační fotografie: <?= $rent['car_image'] ?>" class="car-image" />
                 <p class="car-price">Cena: <?= $rent['car_day_price'] ?>&nbsp;Kč za den</p>
             </div>
 
