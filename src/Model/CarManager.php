@@ -7,12 +7,14 @@ namespace App\Model;
 use App\Database\DB;
 use App\Utils\StringHelper;
 use Nette\Database\UniqueConstraintViolationException;
+use PDOException;
 use function date;
 use function explode;
 use function getimagesize;
 use function is_uploaded_file;
 use function move_uploaded_file;
 use function preg_match;
+use function unlink;
 use const UPLOAD_ERR_OK;
 
 /**
@@ -67,11 +69,15 @@ class CarManager
      *
      * @param int $id Car's ID
      *
-     * @return array Car
+     * @return array|null Car
      */
-    public function getCar(int $id): array
+    public function getCar(int $id): ?array
     {
-        $data = $this->db->oneResult("SELECT * FROM `cars` WHERE `car_id` = ?", $id);
+        try {
+            $data = $this->db->oneResult("SELECT * FROM `cars` WHERE `car_id` = ?", $id);
+        } catch (PDOException $e) {
+            return null;
+        }
 
         return $this->stringHelper->treatArray($data);
     }
@@ -128,5 +134,31 @@ class CarManager
         } catch (UniqueConstraintViolationException $e) {
             return "Toto auto je již v systému";
         }
+    }
+
+    /**
+     * Deletes an existing car
+     *
+     * @param int $id Car's ID
+     *
+     * @return string Error message
+     */
+    public function deleteCar(int $id): string
+    {
+        if (empty($id)) {
+            return "Nebylo zadáno ID auta";
+        }
+
+        try {
+            $carImage = $this->db->oneValue("SELECT `image_name` FROM `cars` WHERE `car_id` = ?", $id);
+        } catch (PDOException $e) {
+            return "Zadané auto neexistuje";
+        }
+
+        $this->db->withoutResult("DELETE FROM `cars` WHERE `car_id` = ?", $id);
+
+        unlink(__DIR__."/../../".self::IMAGE_DIR."/{$carImage}");
+
+        return "Auto bylo úspěšně smazáno";
     }
 }
