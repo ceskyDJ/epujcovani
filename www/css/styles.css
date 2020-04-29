@@ -147,9 +147,25 @@ a {
   background: #F0F0F0;
 }
 
+.content-header.administration {
+  background: white;
+  padding-bottom: 1em;
+}
+
 .content-heading {
   font-size: 1.3em;
   font-weight: bold;
+}
+
+.admin-top-link {
+  color: #9A0100;
+  display: flex;
+  align-items: center;
+}
+
+.admin-top-link .icon {
+  font-size: 1.5em;
+  margin-right: .5em;
 }
 
 .content-section {

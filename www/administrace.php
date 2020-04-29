@@ -28,7 +28,7 @@ $cars = $carManager->getCars();
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="author" content="Michal ŠMAHEL (ceskyDJ)" />
-    <title>ŠMAHEL - ePujcovani.cz</title>
+    <title>ŠMAHEL - Administrace | ePujcovani.cz</title>
     <link rel="stylesheet" href="css/styles.css" type="text/css" />
 </head>
 
@@ -48,8 +48,8 @@ $cars = $carManager->getCars();
 
 
 <main class="page-content">
-    <header class="content-header">
-        <h2 class="content-heading">Nabídka aut k vypůjčení</h2>
+    <header class="content-header administration">
+        <a href="vlozeni-auta.php" class="admin-top-link"><i class="fas fa-plus-square icon"></i> Nové auto</a>
     </header>
 
 
@@ -65,11 +65,16 @@ $cars = $carManager->getCars();
 
                 <p class="car-price">Cena: <?= $car['day_price'] ?>&nbsp;Kč za den</p>
 
-                <a href="#" class="car-order">Objednat</a>
+                <div class="tools">
+                    <a href="editace-auta.php?id=<?= $car['car_id'] ?>" class="edit-car"><i class="fas fa-pen"></i></a>
+                    <a href="smazani-auta.php?id=<?= $car['car_id'] ?>" class="delete-car"><i class="fas fa-trash"></i></a>
+                </div>
             </section>
         </article>
         <?php endforeach; ?>
     </section>
 </main>
+
+<script src="https://kit.fontawesome.com/7d2f55cfde.js" crossorigin="anonymous"></script>
 </body>
 </html>
