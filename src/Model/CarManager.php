@@ -9,8 +9,10 @@ use App\Utils\StringHelper;
 use Nette\Database\UniqueConstraintViolationException;
 use PDOException;
 use function date;
+use function end;
 use function explode;
 use function getimagesize;
+use function header;
 use function is_uploaded_file;
 use function move_uploaded_file;
 use function preg_match;
@@ -97,6 +99,10 @@ class CarManager
             return "Nebyla vyplněna všechna pole";
         }
 
+        if (preg_match("%^[A-Za-zĚŠČŘŽÝÁÍÉÚŮĎŤŇěščřžýáíéůúďťň0-9 ]+$%", $name) === 0) {
+            return "Chybný formát názvu auta. Povolená jsou velká a malá písmena, číslice a mezery";
+        }
+
         if (preg_match("%^\d+$%", $dayPrice) === 0) {
             return "Neplatný formát ceny";
         }
@@ -130,10 +136,78 @@ class CarManager
 
             move_uploaded_file($image['tmp_name'], __DIR__."/../../".self::IMAGE_DIR."/{$imageName}");
 
+            header("Location: administrace.php");
+
             return "Auto bylo úspěšně přidáno";
         } catch (UniqueConstraintViolationException $e) {
             return "Toto auto je již v systému";
         }
+    }
+
+    /**
+     * Edits an exiting car of the system
+     *
+     * @param int $id Car's ID
+     * @param string $name Car's name
+     * @param string $dayPrice Day price of car rent
+     * @param array $image Image data
+     *
+     * @return string Error message
+     */
+    public function editCar(int $id, string $name, string $dayPrice, array $image): string
+    {
+        if (empty($id) || empty($name) || empty($dayPrice) || empty($image)) {
+            return "Nebyla vyplněna všechna pole";
+        }
+
+        if (preg_match("%^[A-Za-zĚŠČŘŽÝÁÍÉÚŮĎŤŇěščřžýáíéůúďťň0-9 ]+$%", $name) === 0) {
+            return "Chybný formát názvu auta. Povolená jsou velká a malá písmena, číslice a mezery";
+        }
+
+        if (preg_match("%^\d+$%", $dayPrice) === 0) {
+            return "Neplatný formát ceny";
+        }
+
+        if ($image['error'] !== UPLOAD_ERR_OK || is_uploaded_file($image['tmp_name']) === false) {
+            return "Chyba při nahrávání obrázku";
+        }
+
+        $imageData = getimagesize($image['tmp_name']);
+        if ($imageData === false || $imageData[0] === 0 || $imageData[1] === 0
+            || preg_match(
+                "%^image/%",
+                $imageData['mime']
+            ) === 0) {
+            return "Neplatný obrázek";
+        }
+
+        $imageNameParts = explode(".", $image['name']);
+        $imageExtension = end($imageNameParts);
+        $imageName = date("YmdHis").".{$imageExtension}";
+
+        try {
+            $oldImage = $this->db->oneValue("SELECT `image_name` FROM `cars` WHERE `car_id` = ?", $id);
+        } catch (PDOException $e) {
+            return "Zadané auto neexistuje";
+        }
+
+        unlink(__DIR__."/../../".self::IMAGE_DIR."/{$oldImage}");
+
+        $this->db->withoutResult(
+            "
+        UPDATE `cars` SET `name` = ?, `day_price` = ?, `image_name` = ? WHERE `car_id` = ?
+        ",
+            $name,
+            $dayPrice,
+            $imageName,
+            $id
+        );
+
+        move_uploaded_file($image['tmp_name'], __DIR__."/../../".self::IMAGE_DIR."/{$imageName}");
+
+        header("Location: administrace.php");
+
+        return "Auto bylo úspěšně upraveno";
     }
 
     /**
@@ -158,6 +232,8 @@ class CarManager
         $this->db->withoutResult("DELETE FROM `cars` WHERE `car_id` = ?", $id);
 
         unlink(__DIR__."/../../".self::IMAGE_DIR."/{$carImage}");
+
+        header("Location: administrace.php");
 
         return "Auto bylo úspěšně smazáno";
     }

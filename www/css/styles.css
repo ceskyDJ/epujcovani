@@ -360,6 +360,10 @@ a {
   padding: 0 1em 1em 1em;
 }
 
+.form-page .section-content.edit-car {
+  padding-top: 1em;
+}
+
 .admin-form input:not([type="submit"]) {
   border: 1px inset #8A8A8A;
   padding: .6em .5em;
@@ -381,6 +385,12 @@ a {
 
 .admin-form input[type="file"] {
   background: white;
+}
+
+.admin-form .car-image {
+  width: 100%;
+  max-width: 20em;
+  margin-top: .7em;
 }
 
 .admin-form .send-button {
