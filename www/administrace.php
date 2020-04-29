@@ -41,7 +41,7 @@ $cars = $carManager->getCars();
         <ul class="menu-list">
             <li class="menu-item"><a href="#" class="menu-link">Podmínky</a></li>
             <li class="menu-item"><a href="#" class="menu-link">Kontakty</a></li>
-            <li class="menu-item"><a href="administrace.php" class="menu-link">Administrace</a></li>
+            <li class="menu-item"><a href="vypujcky-administrace.php" class="menu-link">Administrace výpůjček</a></li>
         </ul>
     </nav>
 </header>

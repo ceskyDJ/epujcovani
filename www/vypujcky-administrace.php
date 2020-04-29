@@ -40,8 +40,7 @@ $rents = $rentManager->getActualRents();
     <nav class="main-menu">
         <ul class="menu-list">
             <li class="menu-item"><a href="index.php" class="menu-link">Nabídka</a></li>
-            <li class="menu-item"><a href="vypujcky-administrace.php" class="menu-link">Administrace</a></li>
-            <li class="menu-item"><a href="vlozeni-auta.php" class="menu-link">Vložení auta</a></li>
+            <li class="menu-item"><a href="administrace.php" class="menu-link">Administrace</a></li>
             <li class="menu-item"><a href="#" class="menu-link">Odhlášení</a></li>
         </ul>
     </nav>
