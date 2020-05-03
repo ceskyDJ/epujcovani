@@ -147,14 +147,22 @@ a {
   background: #F0F0F0;
 }
 
+.content-header.white-background,
 .content-header.administration {
   background: white;
+}
+
+.content-header.administration {
   padding-bottom: 1em;
 }
 
 .content-heading {
   font-size: 1.3em;
   font-weight: bold;
+}
+
+.after-heading-text {
+  margin-top: 1em;
 }
 
 .admin-top-link {

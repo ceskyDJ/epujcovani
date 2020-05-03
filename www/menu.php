@@ -10,10 +10,18 @@ declare(strict_types = 1);
  */
 
 ?>
-<?php if (!isset($type) || $type === "normal"): ?>
+<?php if (!isset($type) || $type === "normal-main"): ?>
     <nav class="main-menu">
         <ul class="menu-list">
-            <li class="menu-item"><a href="#" class="menu-link">Podmínky</a></li>
+            <li class="menu-item"><a href="podminky.php" class="menu-link">Podmínky</a></li>
+            <li class="menu-item"><a href="#" class="menu-link">Kontakty</a></li>
+            <li class="menu-item"><a href="administrace.php" class="menu-link">Administrace</a></li>
+        </ul>
+    </nav>
+<?php elseif ($type === "normal"): ?>
+    <nav class="main-menu">
+        <ul class="menu-list">
+            <li class="menu-item"><a href="index.php" class="menu-link">Nabídka</a></li>
             <li class="menu-item"><a href="#" class="menu-link">Kontakty</a></li>
             <li class="menu-item"><a href="administrace.php" class="menu-link">Administrace</a></li>
         </ul>
