@@ -37,13 +37,7 @@ $cars = $carManager->getCars();
 <header class="page-header">
     <h1 class="main-heading">epůjčování.cz</h1>
 
-    <nav class="main-menu">
-        <ul class="menu-list">
-            <li class="menu-item"><a href="#" class="menu-link">Podmínky</a></li>
-            <li class="menu-item"><a href="#" class="menu-link">Kontakty</a></li>
-            <li class="menu-item"><a href="administrace.php" class="menu-link">Administrace</a></li>
-        </ul>
-    </nav>
+    <?php include "menu.php"; ?>
 </header>
 
 

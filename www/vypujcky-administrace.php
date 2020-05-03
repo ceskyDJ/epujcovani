@@ -37,13 +37,7 @@ $rents = $rentManager->getActualRents();
 <header class="page-header">
     <h1 class="main-heading">epůjčování.cz</h1>
 
-    <nav class="main-menu">
-        <ul class="menu-list">
-            <li class="menu-item"><a href="index.php" class="menu-link">Nabídka</a></li>
-            <li class="menu-item"><a href="administrace.php" class="menu-link">Administrace</a></li>
-            <li class="menu-item"><a href="#" class="menu-link">Odhlášení</a></li>
-        </ul>
-    </nav>
+    <?php $type = "admin"; include "menu.php"; ?>
 </header>
 
 
